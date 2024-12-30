@@ -4,15 +4,17 @@ from translate import Translator
 from wordlist import levelOne, levelTwo, levelThree
 
 # Constants
-LANGUAGE_CODES = ['fr', 'it', 'es', 'ru', 'pt', 'zh', 'de']
-LANGUAGES = ['French', 'Italian', 'Spanish', 'Russian', 'Portuguese', 'Chinese', 'German']
+LANGUAGE_CODES = ['en','fr', 'it', 'es', 'ru', 'pt', 'zh', 'de']
+LANGUAGES = ['English','French', 'Italian', 'Spanish', 'Russian', 'Portuguese', 'Chinese', 'German']
 LEVELS = [levelOne, levelTwo, levelThree]
 SIMILARITY_THRESHOLD = 70
+
 
 def translate(text, from_lang, to_lang):
     try:
         translator = Translator(provider='mymemory', from_lang=from_lang, to_lang=to_lang)
         translation = translator.translate(text)
+        #remove punctuation/capitilization
         translation = translation.translate(str.maketrans('', '', string.punctuation))
         translation = re.sub(r'[^\p{L} ]+', '', translation).lower()
         return translation
