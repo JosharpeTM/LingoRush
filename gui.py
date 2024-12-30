@@ -18,8 +18,9 @@ class TranslationGame:
         self.score = 0
         self.level = 1
         self.lives = 5
-        self.selected_language = None
-        self.current_phrase = ""
+        self.to_language = None
+        self.english_phrase = ""
+        self.source_translation = ""
         self.correct_translation = ""
         self.progress_bar = None
 
@@ -27,7 +28,7 @@ class TranslationGame:
 
     def apply_theme(self):
         style = ttk.Style(self.root)
-        style.theme_use('winnative')
+        style.theme_use('xpnative')
         style.configure("TLabel", font=("Rockwell", 14), background="#f0f0f0", foreground="#333333")
         style.configure("TButton", font=("Rockwell", 14), background="#d9d9d9", foreground="#333333", padding=5, relief="flat", borderwidth=1)
         style.configure("TProgressbar", thickness=20)
@@ -81,10 +82,7 @@ class TranslationGame:
         output_box = ttk.Entry(output_frame, textvariable=self.translation_result, width=100, state="readonly")
         output_box.grid(row=0, column=1, padx=10, pady=5)
 
-        # Translate button
         ttk.Button(self.root, text="Translate", command=self.perform_translation).pack(pady=20)
-
-        # Back to main menu button
         ttk.Button(self.root, text="Back to Main Menu", command=self.setup_main_menu).pack(pady=10)
 
     def perform_translation(self):
@@ -121,13 +119,35 @@ class TranslationGame:
 
     def language_selection(self):
         self.clear_window()
-        ttk.Label(self.root, text="Choose Language to Play", font=("Rockwell", 16)).pack(pady=20)
-        for i, language in enumerate(LANGUAGES):
-            ttk.Button(self.root, text=language, command=lambda i=i: self.start_game(i)).pack(pady=5)
+        ttk.Label(self.root, text="Choose Source and Target Languages", font=("Rockwell", 16)).pack(pady=20)
 
-    def start_game(self, language_index):
-        self.selected_language = LANGUAGE_CODES[language_index]
-        self.language_name = LANGUAGES[language_index]
+        # Dropdown for source language
+        source_frame = ttk.Frame(self.root)
+        source_frame.pack(pady=10)
+        ttk.Label(source_frame, text="Source Language:").grid(row=0, column=0, padx=10, pady=5)
+
+        self.source_language = tk.StringVar(value=LANGUAGES[0])
+        source_dropdown = ttk.Combobox(source_frame, textvariable=self.source_language, values=LANGUAGES, state="readonly")
+        source_dropdown.grid(row=0, column=1, padx=10, pady=5)
+
+        # Dropdown for target language
+        target_frame = ttk.Frame(self.root)
+        target_frame.pack(pady=10)
+        ttk.Label(target_frame, text="Target Language:").grid(row=0, column=0, padx=10, pady=5)
+
+        self.target_language = tk.StringVar(value=LANGUAGES[1])
+        target_dropdown = ttk.Combobox(target_frame, textvariable=self.target_language, values=LANGUAGES, state="readonly")
+        target_dropdown.grid(row=0, column=1, padx=10, pady=5)
+
+        # Begin game button
+        ttk.Button(self.root, text="Begin Game", command=self.start_game).pack(pady=20)
+
+        # Back to main menu button
+        ttk.Button(self.root, text="Back to Main Menu", command=self.setup_main_menu).pack(pady=10)
+
+    def start_game(self):
+        self.from_language = LANGUAGE_CODES[LANGUAGES.index(self.source_language.get())]
+        self.to_language = LANGUAGE_CODES[LANGUAGES.index(self.target_language.get())]
         self.score = 0
         self.level = 1
         self.lives = 5
@@ -143,8 +163,9 @@ class TranslationGame:
             self.setup_main_menu()
             return
 
-        self.current_phrase = random.choice(list(LEVELS[self.level - 1]))
-        self.correct_translation = translate(self.current_phrase, 'en', self.selected_language)
+        self.english_phrase = random.choice(list(LEVELS[self.level - 1]))
+        self.source_translation = translate(self.english_phrase, 'en', self.from_language)
+        self.correct_translation = translate(self.source_translation, self.from_language, self.to_language)
 
         self.clear_window()
         
@@ -155,8 +176,8 @@ class TranslationGame:
         self.update_progress_bar()
 
         ttk.Label(self.root, text=f"Score: {self.score}   Level: {self.level}   Lives: {self.lives}").pack(pady=10)
-        ttk.Label(self.root, text=f"Translate the following word/phrase into {self.language_name}:").pack(pady=10)
-        ttk.Label(self.root, text=f"{self.current_phrase}", font=("Rockwell", 18)).pack(pady=20)
+        ttk.Label(self.root, text=f"Translate the following word/phrase into {self.target_language.get()}:").pack(pady=10)
+        ttk.Label(self.root, text=f"{self.source_translation}", font=("Rockwell", 18)).pack(pady=20)
 
         self.user_input = ttk.Entry(self.root)
         self.user_input.pack(pady=10)
