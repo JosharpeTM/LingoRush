@@ -8,7 +8,7 @@ class TranslationGame:
     def __init__(self, root):
         # Initialize the main game window and apply UI settings
         self.root = root
-        self.root.title("Multi-Language Translation Game")
+        self.root.title("Lingo Rush: A Multi-Language Translation Game")
         self.apply_theme()
 
         self.root.geometry("800x600")
@@ -26,26 +26,24 @@ class TranslationGame:
 
         self.setup_main_menu()
 
+    # Apply a consistent theme to the UI elements
     def apply_theme(self):
-        # Apply a consistent theme to the UI elements
         style = ttk.Style(self.root)
         style.theme_use('xpnative')
         style.configure("TLabel", font=("Rockwell", 14), background="#f0f0f0", foreground="#333333")
         style.configure("TButton", font=("Rockwell", 14), background="#d9d9d9", foreground="#333333", padding=5, relief="flat", borderwidth=1)
         style.configure("TProgressbar", thickness=20)
 
+    # Create the main menu interface
     def setup_main_menu(self):
-        # Create the main menu interface
         self.clear_window()
 
         try:
-            # Load logo image for the main menu
             self.logo_image = tk.PhotoImage(file="gfx/logo_title.png")
         except Exception as e:
             print(f"Error loading image: {e}")
             self.logo_image = None
 
-        # Display the logo or fallback title
         if self.logo_image:
             logo_label = ttk.Label(self.root, image=self.logo_image)
             logo_label.pack(pady=20)
@@ -59,8 +57,8 @@ class TranslationGame:
         ttk.Button(self.root, text="Rules", command=self.show_rules).pack(pady=10)
         ttk.Button(self.root, text="Exit", command=self.root.quit).pack(pady=10)
 
+    # Set up the translation tool interface
     def translation_app(self):
-        # Set up the translation tool interface
         self.clear_window()
         
         ttk.Label(self.root, text="Translation Tool", font=("Rockwell", 18)).pack(pady=20)
@@ -182,7 +180,7 @@ class TranslationGame:
         if self.level == 4:
             self.display_message("Congratulations!", "You completed the game. Well done!")
             self.setup_main_menu()
-            return
+            returnS
 
         # Select a random phrase and generate translations
         self.english_phrase = random.choice(list(LEVELS[self.level - 1]))
@@ -235,8 +233,10 @@ class TranslationGame:
             self.score += self.level
             self.feedback_label.config(text="Correct!", foreground="green")
             if self.score >= self.level_progress_target():
+                if self.score == 30:
+                    self.feedback_label.config(text="Congratulations! You've Beaten My Game!", foreground="yellow")
+                    self.root.after(5000, self.main_game_loop)
                 self.level += 1
-                self.score = 0
                 self.feedback_label.config(text=f"Great job! You've advanced to Level {self.level}!", foreground="blue")
         else:
             self.lives -= 1
@@ -245,7 +245,7 @@ class TranslationGame:
         self.root.after(2000, self.main_game_loop)
 
     def level_progress_target(self):
-        return {1: 5, 2: 10, 3: 15}.get(self.level, 0)
+        return {1: 5, 2: 15, 3: 30}.get(self.level, 0)
 
     def update_progress_bar(self):
         self.progress_bar['value'] = min(self.score, self.level_progress_target())
