@@ -11,25 +11,31 @@
 - **Multiple languages supported**: English, French, Italian, Spanish, Russian, Portuguese, Chinese, and German.
 ---
 ## Files
+- ```LingoRush.exe``` Pre-built executable to run on any computer.
 - ```main.py``` Main script to create Tkinter instance
 - ```gui.py``` Contains the graphical user interface (GUI) components and logic. Manages the layout, widgets, and user interactions for the game using Tkinter.
 - ```utilities.py``` Includes helper functions and constants used throughout the application, such as translation logic, similarity evaluation, and pre-defined constants like supported languages and levels.
 - ```wordlist.py``` Defines the word and phrase lists for the game, organized by difficulty levels (Level 1, Level 2, Level 3). These lists are used as the source for words to translate during gameplay.
-- ```requirments.py``` A list of dependencies needed to install before running the application.
+- ```requirements.txt``` A list of dependencies needed to install before running the application.
 
 ## Setup Instructions
 Follow these steps to run the application on your local machine:
 
 ### Prerequisites
+(note that Python is only required if you wish to build the application yourself)
 1. **Python 3.9-3.11** Ensure you have Python 3.9-3.11 installed on your system. If not, download it from [python.org](https://www.python.org/downloads/).
 2. **Git**: Optionally, you can install Git to clone the repository ([Git Installation Guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)).
 
 ### Step 1: Download/Clone the Repository
 Clone this repository to your local machine using:
 ```bash
-git clone https://github.com/JosharpeTM/Multi-Language-Translator-Game
+git clone https://github.com/JosharpeTM/LingoRush
 ```
-### Step 2: Navigate to the Project Directory
+
+### Step 2A: Run the LingoRush executable
+For easy use run the ```LingoRush``` executable packaged within the project.
+
+### Step 2B: Navigate to the Project Directory
 Change into the project directory:
 ```bash
 cd [insert folder directory]
