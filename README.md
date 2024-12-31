@@ -31,11 +31,12 @@ Clone this repository to your local machine using:
 ```bash
 git clone https://github.com/JosharpeTM/LingoRush
 ```
-
-### Step 2A: Run the LingoRush executable
+### Option A: Run the Executable
+### Step 2: Run the LingoRush executable
 For easy use run the ```LingoRush``` executable packaged within the project.
 
-### Step 2B: Navigate to the Project Directory
+### Option B: Build the project yourself
+### Step 2: Navigate to the Project Directory
 Change into the project directory:
 ```bash
 cd [insert folder directory]
