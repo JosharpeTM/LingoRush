@@ -1,20 +1,19 @@
-# Multi-Language Translation Game
+# LingoRush: A Multi-Language Translation Game
 
-The **Multi-Language Translation Game** is an interactive application where players translate words or phrases into various languages, test their language skills, and progress through levels. Built with Python and Tkinter, it provides a fun way to learn new languages.
-
+**LingoRush** is an interactive application where players translate words or phrases into various languages, test their language skills, and progress through levels. Built with Python and Tkinter, it provides a fun way to learn new languages.
 ---
-
 ## Features
 - **Tkinter Graphics**: A responsive and user-friendly GUI built with Python's Tkinter library.
 -  **MyMemory Translation API**: Fetch accurate translations for words and phrases in multiple languages.
 -  **RapidFuzz API**: Advanced similarity matching to evaluate user input.
-- **Multiple languages supported**: French, Italian, Spanish, Russian, Portuguese, Chinese, and German.
+- **Multiple languages supported**: English, French, Italian, Spanish, Russian, Portuguese, Chinese, and German.
 ---
 ## Files
 - ```main.py``` Main script to create Tkinter instance
 - ```gui.py``` Contains the graphical user interface (GUI) components and logic. Manages the layout, widgets, and user interactions for the game using Tkinter.
 - ```utilities.py``` Includes helper functions and constants used throughout the application, such as translation logic, similarity evaluation, and pre-defined constants like supported languages and levels.
 - ```wordlist.py``` Defines the word and phrase lists for the game, organized by difficulty levels (Level 1, Level 2, Level 3). These lists are used as the source for words to translate during gameplay.
+- ```requirments.py``` A list of dependencies needed to install before running the application.
 
 ## Setup Instructions
 Follow these steps to run the application on your local machine:
