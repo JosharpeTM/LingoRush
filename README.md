@@ -1,7 +1,9 @@
-# LingoRush: A Multi-Language Translation Game
+<div align="center">
+  <img src="gfx/logo_title.png" alt="Lingo Rush">
+  <h2>A Multi-Language Translation Game By Joshua Sharpe</h2>
+  <h2>LingoRush is an interactive application where players translate words or phrases into various languages, test their language skills, and progress through levels. Built with Python and Tkinter, it provides a fun way to learn new languages.</h2>
+</div>
 
-**LingoRush** is an interactive application where players translate words or phrases into various languages, test their language skills, and progress through levels. Built with Python and Tkinter, it provides a fun way to learn new languages.
----
 ## Features
 - **Tkinter Graphics**: A responsive and user-friendly GUI built with Python's Tkinter library.
 -  **MyMemory Translation API**: Fetch accurate translations for words and phrases in multiple languages.
